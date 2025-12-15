@@ -20,5 +20,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 
+# VSCode
+.vscode
 
 data
