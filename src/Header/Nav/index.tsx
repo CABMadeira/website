@@ -1,25 +1,127 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from "react"
 
 import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
-import { SearchIcon } from 'lucide-react'
+import { MenuIcon, ChevronDown, X } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+
+type NavItem = any
+
+const DisclosureNav: React.FC<{ label: string; items: any[]; onNavigate?: () => void }> = ({ label, items, onNavigate }) => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <li className="border-b last:border-b-0">
+      <button
+        className="w-full flex items-center justify-between py-2"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <span>{label}</span>
+        <ChevronDown className={`transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <ul className="pl-4">
+          {items.map((it, i) => {
+            const l = it?.link || it
+            return (
+              <li key={i}>
+                {l?.url || l?.reference ? (
+                  <CMSLink {...l} appearance="link" className="block py-2" onClick={onNavigate} />
+                ) : (
+                  <Link href={l?.url || '#'} onClick={onNavigate} className="block py-2">{l?.label || l}</Link>
+                )}
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </li>
+  )
+}
+
+
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
+  const [open, setOpen] = useState(false)
+  const [entered, setEntered] = useState(false)
+
+  useEffect(() => {
+    let t: number | undefined
+    if (open) {
+      // small delay to allow initial render then trigger the CSS transform
+      t = window.setTimeout(() => setEntered(true), 10)
+    } else {
+      // reset entered for next open; we intentionally do not animate closing
+      setEntered(false)
+    }
+    return () => {
+      if (t) clearTimeout(t)
+    }
+  }, [open])
 
   return (
-    <nav className="flex gap-3 items-center">
-      {navItems.map(({ link }, i) => {
-        return <CMSLink key={i} {...link} appearance="link" />
-      })}
-      <Link href="/search">
-        <span className="sr-only">Search</span>
-        <SearchIcon className="w-5 text-primary" />
-      </Link>
-    </nav>
+    <div>
+
+      <Button
+        onClick={() => setOpen(true)}
+        variant="link"
+      >
+        <MenuIcon />
+      </Button>
+
+      {open && (
+        <div className="fixed inset-0 z-50 flex">
+          <div
+            className="fixed inset-0 bg-black/60"
+            onClick={() => setOpen(false)}
+            aria-hidden
+          />
+
+          <aside
+            role="dialog"
+            aria-modal="true"
+            className={`relative h-full w-[80%] max-w-xs bg-background p-4 shadow-lg transform transition-transform duration-300 ease-out ${entered ? "translate-x-0" : "-translate-x-full"
+              } rounded-tr-xl rounded-br-xl`}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Menu</h3>
+              <button aria-label="Close menu" onClick={() => setOpen(false)} className="p-2">
+                <X />
+              </button>
+            </div>
+
+            <nav>
+              <ul className="flex flex-col gap-1">
+                {navItems.map((item: NavItem, idx: number) => {
+                  const link = item?.link || {}
+                  const label = link.label || ""
+
+                  const sub = (item.items || item.subItems || []) as NavItem[]
+
+                  if (sub && sub.length > 0) {
+                    return <DisclosureNav key={idx} label={label} items={sub} onNavigate={() => setOpen(false)} />
+                  }
+
+                  return (
+                    <li key={idx}>
+                      <CMSLink {...link} appearance="link" className="block py-2" onClick={() => setOpen(false)} />
+                    </li>
+                  )
+                })}
+              </ul>
+            </nav>
+          </aside>
+        </div>
+      )}
+    </div>
+
   )
 }
+
