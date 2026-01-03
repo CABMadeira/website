@@ -9,7 +9,7 @@ export const contact = ({ contactForm, heroImage }: ContactArgs) => {
     slug: 'contact',
     _status: 'published',
     hero: {
-      media: heroImage.id,
+      type: 'none',
     },
     layout: [
       {

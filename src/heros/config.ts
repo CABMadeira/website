@@ -5,8 +5,28 @@ export const hero: Field = {
   type: 'group',
   fields: [
     {
+      name: 'type',
+      type: 'select',
+      defaultValue: 'none',
+      label: 'Type',
+      options: [
+        {
+          label: 'None',
+          value: 'none',
+        },
+        {
+          label: 'Home Hero',
+          value: 'home',
+        },
+      ],
+      required: true,
+    },
+    {
       name: 'media',
       type: 'upload',
+      admin: {
+        condition: (_, { type } = {}) => ['home'].includes(type),
+      },
       relationTo: 'media',
       required: true,
     },

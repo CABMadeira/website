@@ -158,7 +158,8 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    media: number | Media;
+    type: 'none' | 'home';
+    media?: (number | null) | Media;
   };
   layout: (
     | CallToActionBlock
@@ -1098,6 +1099,7 @@ export interface PagesSelect<T extends boolean = true> {
   hero?:
     | T
     | {
+        type?: T;
         media?: T;
       };
   layout?:

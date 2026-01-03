@@ -10,7 +10,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { HomeHero } from '@/heros/HomeHero'
+import { RenderHero } from '@/heros/RenderHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -68,7 +68,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <HomeHero {...hero} />
+      <RenderHero {...hero} />
       <RenderBlocks blocks={layout} />
     </article>
   )
