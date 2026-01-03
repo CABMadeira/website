@@ -7,6 +7,10 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { LastMatchesBlock } from '@/blocks/LastMatches/Component'
+import { CalendarBlock } from '@/blocks/Calendar/Component'
+import { StandingsBlock } from '@/blocks/Standings/Component'
+import { TeamsShowcaseBlock } from '@/blocks/TeamsShowcase/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -14,6 +18,10 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  lastMatches: LastMatchesBlock,
+  calendar: CalendarBlock,
+  standings: StandingsBlock,
+  teamsShowcase: TeamsShowcaseBlock,
 }
 
 export const RenderBlocks: React.FC<{

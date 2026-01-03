@@ -211,7 +211,7 @@ export const seed = async ({
     payload.create({
       collection: 'pages',
       depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
+      data: contactPageData({ heroImage: imageHomeDoc, contactForm: contactForm }),
     }),
   ])
 

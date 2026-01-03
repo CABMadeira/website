@@ -6,6 +6,7 @@ import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { MenuIcon, ChevronDown, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
@@ -51,6 +52,11 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
   const [open, setOpen] = useState(false)
   const [entered, setEntered] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (open) setOpen(false)
+  }, [pathname])
 
   useEffect(() => {
     let t: number | undefined
