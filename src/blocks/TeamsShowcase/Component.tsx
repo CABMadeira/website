@@ -60,7 +60,7 @@ export const TeamsShowcaseBlock: React.FC<Props> = ({
                                 </h3>
 
                                 <p className="dark:text-gray-300 text-slate-700 text-sm leading-relaxed mb-8 italic">
-                                    "{team.description}"
+                                    &quot;{team.description}&quot;
                                 </p>
 
                                 <div className="grid grid-cols-2 gap-4 pt-8 dark:border-t dark:border-slate-700 border-t border-blue-200">

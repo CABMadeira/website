@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import React from 'react'
-import { Media } from '../Media'
 import { getServerSideURL } from '@/utilities/getURL'
 
 interface Props {
@@ -17,7 +16,7 @@ export const Logo = (props: Props) => {
 
   const serverUrl = getServerSideURL()
 
-  let url = serverUrl + '/cab.png'
+  const url = serverUrl + '/logo.png'
 
   return (
     /* eslint-disable @next/next/no-img-element */

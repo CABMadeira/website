@@ -13,7 +13,7 @@ export const ThemeSelector: React.FC = () => {
   const [value, setValue] = useState('')
 
   const toggleTheme = () => {
-    let newTheme: Theme | null = value === 'dark' ? 'light' : 'dark'
+    const newTheme: Theme | null = value === 'dark' ? 'light' : 'dark'
     setTheme(newTheme)
     setValue(newTheme ?? 'auto')
   }
