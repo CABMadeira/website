@@ -43,7 +43,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         </Item>
 
         <div className="mx-auto">
-          {pathname && pathname !== '/' && (
+          {pathname && (
             <Link href="/">
               <Logo loading="eager" priority="high" />
             </Link>

@@ -71,13 +71,11 @@ export default buildConfig({
   plugins: [
     ...plugins,
     vercelBlobStorage({
-      enabled: process.env.BLOB_ENABLE === "true",
+      enabled: process.env.BLOB_ENABLE === 'true',
       // Specify which collections should use Vercel Blob
       collections: {
-        media: true
+        media: true,
       },
-      // Adds random
-      addRandomSuffix : true,
       // Do uploads directly on the client to bypass limits on Vercel
       clientUploads: true,
       // Token provided by Vercel once Blob storage is added to your Vercel project

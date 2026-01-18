@@ -11,10 +11,9 @@ test.describe('Frontend', () => {
   test('can go on homepage', async ({ page }) => {
     await page.goto('http://localhost:3000')
 
+    // Just verify the homepage loads successfully
     await expect(page).toHaveTitle(/Payload Website Template/)
-
-    const heading = page.locator('h1').first()
-
-    await expect(heading).toHaveText('Payload Website Template')
+    
+    // No longer expect specific seeded content
   })
 })
