@@ -173,23 +173,17 @@ export const seed = async ({
   await payload.update({
     id: post1Doc.id,
     collection: 'posts',
-    data: {
-      relatedPosts: [post2Doc.id, post3Doc.id],
-    },
+    data: {},
   })
   await payload.update({
     id: post2Doc.id,
     collection: 'posts',
-    data: {
-      relatedPosts: [post1Doc.id, post3Doc.id],
-    },
+    data: {},
   })
   await payload.update({
     id: post3Doc.id,
     collection: 'posts',
-    data: {
-      relatedPosts: [post1Doc.id, post2Doc.id],
-    },
+    data: {},
   })
 
   payload.logger.info(`— Seeding contact form...`)

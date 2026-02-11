@@ -19,6 +19,8 @@ const nextConfig = {
         }
       }),
     ],
+    qualities: [75, 100],
+    dangerouslyAllowLocalIP: true,
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {

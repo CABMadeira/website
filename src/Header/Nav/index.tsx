@@ -84,7 +84,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       </Button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex">
+        <div className="fixed inset-0 z-10 flex">
           <div
             className="fixed inset-0 bg-black/60"
             onClick={() => setOpen(false)}

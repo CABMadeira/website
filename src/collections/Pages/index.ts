@@ -7,7 +7,7 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { hero } from '@/heros/config'
+import { HeroBlock } from '../../blocks/Hero/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
@@ -20,6 +20,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { TeamStandingsBlock } from '@/blocks/TeamStanding/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -64,23 +65,29 @@ export const Pages: CollectionConfig<'pages'> = {
       type: 'tabs',
       tabs: [
         {
-          fields: [hero],
-          label: 'Hero',
-        },
-        {
           fields: [
             {
-              name: 'layout',
+              name: 'contentLayout',
+              label: 'Main Content',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [HeroBlock, CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: false,
               admin: {
                 initCollapsed: true,
               },
             },
+            {
+              name: 'sidebarLayout',
+              label: 'Sidebar Content',
+              type: 'blocks',
+              blocks: [TeamStandingsBlock],
+              required: false,
+              admin: { initCollapsed: true },
+            },
           ],
           label: 'Content',
         },
+
         {
           name: 'meta',
           label: 'SEO',

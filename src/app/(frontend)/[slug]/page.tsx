@@ -10,7 +10,6 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { RenderHero } from '@/heros/RenderHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -56,7 +55,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout } = page
+  const { contentLayout, sidebarLayout } = page
 
   return (
     <article className="pb-24">
@@ -66,8 +65,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
-      {layout && <RenderBlocks blocks={layout} />}
+      {contentLayout && <RenderBlocks contentBlocks={contentLayout} sidebarBlocks={sidebarLayout} />}
     </article>
   )
 }

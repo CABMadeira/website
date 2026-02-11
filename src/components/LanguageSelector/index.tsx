@@ -13,8 +13,8 @@ import {
 const LANGUAGE_STORAGE_KEY = 'site-language'
 
 const languages = [
-    { code: 'pt', label: 'Português', flag: '🇵🇹' },
-    { code: 'en', label: 'English', flag: '🇺🇸' }
+    { code: 'pt', label: 'Português' },
+    { code: 'en', label: 'English' }
 ]
 
 export const LanguageSelector: React.FC = () => {
@@ -47,7 +47,6 @@ export const LanguageSelector: React.FC = () => {
                     {languages.map((lang) => (
                         <SelectItem key={lang.code} value={lang.code}>
                             <div className="flex items-center gap-2">
-                                <span>{lang.flag}</span>
                                 <span>{lang.label}</span>
                             </div>
                         </SelectItem>

@@ -309,7 +309,6 @@ export const post1: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
       image: heroImage.id,
       title: 'Digital Horizons: A Glimpse into Tomorrow',
     },
-    relatedPosts: [], // this is populated by the seed script
     title: 'Digital Horizons: A Glimpse into Tomorrow',
   }
 }
