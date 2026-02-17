@@ -36,13 +36,20 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   return (
-    <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex items-center w-full">
-        <Item>
-          <HeaderNav data={data} />
-        </Item>
+    <header
+      className="container relative"
+      {...(theme ? { 'data-theme': theme } : {})}
+    >
+      <div className="py-8 grid grid-cols-12 items-center w-full">
+        {/* Left column: span 2 */}
+        <div className="col-span-2 flex items-center">
+          <Item>
+            <HeaderNav data={data} />
+          </Item>
+        </div>
 
-        <div className="mx-auto">
+        {/* Middle column: span 8 */}
+        <div className="col-span-8 flex justify-center">
           {pathname && (
             <Link href="/">
               <Logo loading="eager" priority="high" />
@@ -50,16 +57,20 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           )}
         </div>
 
-        <Item>
-          <div className="flex items-center gap-4">
-            <ThemeSelector />
-            <Link href="/search">
-              <span className="sr-only">Search</span>
-              <SearchIcon className="w-5 text-primary" />
-            </Link>
-          </div>
-        </Item>
+        {/* Right column: span 2 */}
+        <div className="col-span-2 flex justify-end">
+          <Item>
+            <div className="flex items-center gap-4">
+              <ThemeSelector />
+              <Link href="/search">
+                <span className="sr-only">Search</span>
+                <SearchIcon className="w-5 text-primary" />
+              </Link>
+            </div>
+          </Item>
+        </div>
       </div>
     </header>
   )
+
 }

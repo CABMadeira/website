@@ -14,7 +14,7 @@
   }
 
   :root {
-    --yellow: 45 100% 50%; /* Hue 45 for yellow, full saturation, 50% lightness */
+    --yellow: 45 100% 50%;
 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -76,7 +76,7 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0, 0%, 15%, 0.8;
+    --border: 0 0% 15% / 0.8;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
@@ -90,8 +90,19 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+
+    /* Theme-aware background pattern */
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        hsl(var(--foreground) / 0.03),
+        hsl(var(--foreground) / 0.03) 1px,
+        transparent 1px,
+        transparent 24px
+      );
   }
 }
 

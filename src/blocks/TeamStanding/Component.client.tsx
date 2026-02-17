@@ -24,7 +24,7 @@ export const TeamStandings: React.FC<TeamStandingsProps> = ({ maleData, femaleDa
     };
 
     return (
-        <div className="-mt-16 flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6">
 
             <div className="w-full max-w-sm shadow-md rounded-lg overflow-hidden border" style={{ borderColor: 'hsl(var(--border))' }}>
                 {/* Header */}
@@ -62,7 +62,7 @@ export const TeamStandings: React.FC<TeamStandingsProps> = ({ maleData, femaleDa
                     </div>
 
                     <div
-                        className="w-16 -skew-x-12 translate-x-3 z-20"
+                        className="w-16 -skew-x-12 translate-x-3 z-60"
                         style={{ backgroundColor: 'hsl(var(--yellow))' }}
                     />
                 </div>

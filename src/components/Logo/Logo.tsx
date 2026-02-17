@@ -14,9 +14,7 @@ export const Logo = (props: Props) => {
   const loading = loadingFromProps || 'lazy'
   const priority = priorityFromProps || 'low'
 
-  const serverUrl = getServerSideURL()
-
-  const url = serverUrl + '/logo.png'
+  const url = '/logo.png'
 
   return (
     /* eslint-disable @next/next/no-img-element */

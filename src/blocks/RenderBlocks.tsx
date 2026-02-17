@@ -7,7 +7,6 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
-import { HomeHero } from '@/blocks/Hero/Component'
 import { TeamStandingsBlock } from '@/blocks/TeamStanding/Component'
 
 const contentBlockComponents = {
@@ -15,8 +14,7 @@ const contentBlockComponents = {
   content: ContentBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
-  mediaBlock: MediaBlock,
-  heroBlock: HomeHero,
+  mediaBlock: MediaBlock
 }
 
 const sidebarBlockComponents = {
@@ -39,6 +37,7 @@ export const RenderBlocks: React.FC<{
   return (
     <Fragment>
       <div className="container">
+
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
           {/* Left side: content layout */}
           <div className="lg:col-span-2">
