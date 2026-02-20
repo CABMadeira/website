@@ -22,6 +22,8 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { TeamStandingsBlock } from '@/blocks/TeamStanding/config'
 import { CalendarBlock } from '@/blocks/Calendar/config'
+import { NextMatchBlock } from '@/blocks/NextMatchBlock/config'
+import { DiviserBlock } from '@/blocks/Diviser/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -85,7 +87,15 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'contentLayout',
               label: 'Main Content',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, CalendarBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                CalendarBlock,
+                DiviserBlock,
+              ],
               required: false,
               admin: {
                 initCollapsed: true,
@@ -95,7 +105,7 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'sidebarLayout',
               label: 'Sidebar Content',
               type: 'blocks',
-              blocks: [TeamStandingsBlock],
+              blocks: [TeamStandingsBlock, NextMatchBlock],
               required: false,
               admin: { initCollapsed: true },
             },

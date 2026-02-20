@@ -9,6 +9,8 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { TeamStandingsBlock } from '@/blocks/TeamStanding/Component'
 import { CalendarBlock } from './Calendar/Component'
+import { NextMatchBlock } from './NextMatchBlock/Component'
+import { DiviserBlock } from './Diviser/Component'
 
 const contentBlockComponents = {
   archive: ArchiveBlock,
@@ -16,11 +18,13 @@ const contentBlockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
-  calendarBlock: CalendarBlock
+  calendarBlock: CalendarBlock,
+  diviserBlock: DiviserBlock,
 }
 
 const sidebarBlockComponents = {
   teamStandingsBlock: TeamStandingsBlock,
+  nextMatchBlock: NextMatchBlock
 }
 
 export const RenderBlocks: React.FC<{

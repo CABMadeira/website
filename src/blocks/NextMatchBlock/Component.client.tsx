@@ -1,0 +1,160 @@
+'use client'
+
+import React, { useState } from 'react'
+import { ChevronRightCircle, ChevronLeftCircle } from 'lucide-react'
+
+type GameEvent = {
+    date: string
+    time: string
+    homeTeam: string
+    awayTeam: string
+    competition: string
+    gender: 'male' | 'female'
+}
+
+type Props = {
+    maleEvent: GameEvent | null
+    femaleEvent: GameEvent | null
+}
+
+export function NextMatchCard({
+    maleEvent,
+    femaleEvent,
+}: Props) {
+    const tabs: ('male' | 'female')[] = ['male', 'female']
+    const [currentTabIndex, setCurrentTabIndex] = useState(0)
+
+    const goNext = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setCurrentTabIndex((prev) => (prev + 1) % tabs.length)
+        e.currentTarget.blur()
+    }
+
+    const goPrev = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setCurrentTabIndex((prev) => (prev - 1 + tabs.length) % tabs.length)
+        e.currentTarget.blur()
+    }
+
+    const activeTab = tabs[currentTabIndex]
+    const event = activeTab === 'male' ? maleEvent : femaleEvent
+
+    // Common header with buttons
+    const Header = (
+        <div
+            className="relative flex font-semibold text-sm overflow-hidden"
+            style={{
+                backgroundColor: 'hsl(var(--primary))',
+                color: 'hsl(var(--primary-foreground))',
+            }}
+        >
+            <div className="flex items-center justify-between flex-1 px-4 py-3">
+                <div className="flex items-center gap-1">
+                    <button
+                        type="button"
+                        className="p-1 rounded hover:bg-white/10"
+                        aria-label="Previous"
+                        onClick={goPrev}
+                    >
+                        <ChevronLeftCircle size={22} />
+                    </button>
+
+                    <button
+                        type="button"
+                        className="p-1 rounded hover:bg-white/10"
+                        aria-label="Next"
+                        onClick={goNext}
+                    >
+                        <ChevronRightCircle size={22} />
+                    </button>
+                </div>
+
+                <div className="whitespace-nowrap text-right">
+                    {activeTab === 'male' ? 'Male Team' : 'Female Team'}
+                </div>
+            </div>
+
+            <div
+                className="w-16 -skew-x-12 translate-x-3"
+                style={{ backgroundColor: 'hsl(var(--yellow))' }}
+            />
+        </div>
+    )
+
+    return (
+        <div className="flex flex-col items-center gap-6">
+
+            {/* Reusable title */}
+            <h2 className="text-2xl font-bold text-center text-[hsl(var(--primary))]">Next Match</h2>
+
+            <div
+                className="w-full max-w-sm shadow-md rounded-lg overflow-hidden border"
+                style={{ borderColor: 'hsl(var(--border))' }}
+            >
+                {Header}
+
+                {/* Match Content */}
+                {event ? (
+                    <div className="px-4 py-4">
+                        <div
+                            className="text-xs font-semibold mb-2 text-center"
+                            style={{ color: 'hsl(var(--secondary-foreground))' }}
+                        >
+                            {event.competition}
+                        </div>
+
+                        <div className="grid grid-cols-3 items-stretch text-center mb-4">
+                            <div
+                                className="text-sm font-medium py-2 rounded flex items-center justify-center min-h-[40px]"
+                                style={{
+                                    backgroundColor:
+                                        event.homeTeam === 'CAB Madeira' ? 'hsl(var(--yellow))' : 'transparent',
+                                    color:
+                                        event.homeTeam === 'CAB Madeira' ? 'hsl(var(--primary-foreground))' : 'inherit',
+                                }}
+                            >
+                                {event.homeTeam}
+                            </div>
+
+                            <div className="text-xs font-semibold flex items-center justify-center min-h-[40px]">
+                                VS
+                            </div>
+
+                            <div
+                                className="text-sm font-medium py-2 rounded flex items-center justify-center min-h-[40px]"
+                                style={{
+                                    backgroundColor:
+                                        event.awayTeam === 'CAB Madeira' ? 'hsl(var(--yellow))' : 'transparent',
+                                    color:
+                                        event.awayTeam === 'CAB Madeira' ? 'hsl(var(--primary-foreground))' : 'inherit',
+                                }}
+                            >
+                                {event.awayTeam}
+                            </div>
+                        </div>
+
+
+                        <div
+                            className="flex justify-between text-sm font-medium border-t pt-3"
+                            style={{ borderColor: 'hsl(var(--border))' }}
+                        >
+                            <span>
+                                {new Date(`${event.date}T${event.time}`).toLocaleDateString(
+                                    'pt-PT',
+                                    {
+                                        weekday: 'long',
+                                        day: '2-digit',
+                                        month: 'long',
+                                    }
+                                )}
+                            </span>
+                            <span>{event.time}</span>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="px-4 py-6 text-sm text-center text-gray-500">
+                        No upcoming match available.
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}

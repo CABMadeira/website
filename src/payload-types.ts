@@ -156,8 +156,10 @@ export interface Page {
   id: number;
   title: string;
   hero?: HeroBlock[] | null;
-  contentLayout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | CalendarBlock)[] | null;
-  sidebarLayout?: TeamStandingsBlock[] | null;
+  contentLayout?:
+    | (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | CalendarBlock | DiviserBlock)[]
+    | null;
+  sidebarLayout?: (TeamStandingsBlock | NextMatchBlock)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -182,21 +184,6 @@ export interface Page {
  */
 export interface HeroBlock {
   media: number | Media;
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroBlock';
@@ -773,6 +760,15 @@ export interface CalendarBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DiviserBlock".
+ */
+export interface DiviserBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'diviserBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TeamStandingsBlock".
  */
 export interface TeamStandingsBlock {
@@ -781,6 +777,17 @@ export interface TeamStandingsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'teamStandingsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NextMatchBlock".
+ */
+export interface NextMatchBlock {
+  maleApiUrl: string;
+  femaleApiUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'nextMatchBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1074,11 +1081,13 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         calendarBlock?: T | CalendarBlockSelect<T>;
+        diviserBlock?: T | DiviserBlockSelect<T>;
       };
   sidebarLayout?:
     | T
     | {
         teamStandingsBlock?: T | TeamStandingsBlockSelect<T>;
+        nextMatchBlock?: T | NextMatchBlockSelect<T>;
       };
   meta?:
     | T
@@ -1100,7 +1109,6 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface HeroBlockSelect<T extends boolean = true> {
   media?: T;
-  richText?: T;
   id?: T;
   blockName?: T;
 }
@@ -1199,9 +1207,27 @@ export interface CalendarBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DiviserBlock_select".
+ */
+export interface DiviserBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TeamStandingsBlock_select".
  */
 export interface TeamStandingsBlockSelect<T extends boolean = true> {
+  maleApiUrl?: T;
+  femaleApiUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NextMatchBlock_select".
+ */
+export interface NextMatchBlockSelect<T extends boolean = true> {
   maleApiUrl?: T;
   femaleApiUrl?: T;
   id?: T;
