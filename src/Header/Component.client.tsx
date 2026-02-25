@@ -52,7 +52,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <div className="col-span-8 flex justify-center">
           {pathname && (
             <Link href="/">
-              <Logo loading="eager" priority="high" />
+              <Logo loading="eager" priority="high" className='h-28' />
             </Link>
           )}
         </div>

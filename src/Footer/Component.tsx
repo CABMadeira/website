@@ -15,7 +15,8 @@ export async function Footer() {
       <div className="text-center">
         {/* Logo + Text Side by Side */}
         <div className="flex items-center justify-center mb-5 space-x-3 max-h-16">
-          <Logo className="h-12 sm:h-9 max-h-full" />
+          {/* Base height for mobile (smaller screens), larger on md+ */}
+          <Logo className="h-12 md:h-18" />
           <span className="text-2xl font-semibold text-[hsl(var(--secondary))]">
             CAB MADEIRA
           </span>

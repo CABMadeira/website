@@ -157,9 +157,9 @@ export interface Page {
   title: string;
   hero?: HeroBlock[] | null;
   contentLayout?:
-    | (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | CalendarBlock | DiviserBlock)[]
+    | (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | DiviserBlock | ShopFeaturedBlock)[]
     | null;
-  sidebarLayout?: (TeamStandingsBlock | NextMatchBlock)[] | null;
+  sidebarLayout?: (TeamStandingsBlock | NextMatchBlock | CalendarBlock)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -519,31 +519,7 @@ export interface MediaBlock {
  * via the `definition` "ArchiveBlock".
  */
 export interface ArchiveBlock {
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
-  categories?: (number | Category)[] | null;
-  limit?: number | null;
-  selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: number | Post;
-      }[]
-    | null;
+  Description?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -750,22 +726,26 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CalendarBlock".
- */
-export interface CalendarBlock {
-  apiUrl: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'calendarBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "DiviserBlock".
  */
 export interface DiviserBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'diviserBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ShopFeaturedBlock".
+ */
+export interface ShopFeaturedBlock {
+  /**
+   * Show only 3 products with a link to the full shop
+   */
+  isCompactView?: boolean | null;
+  shopApiUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'shopFeaturedBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -788,6 +768,16 @@ export interface NextMatchBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'nextMatchBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalendarBlock".
+ */
+export interface CalendarBlock {
+  apiUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'calendarBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1080,14 +1070,15 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        calendarBlock?: T | CalendarBlockSelect<T>;
         diviserBlock?: T | DiviserBlockSelect<T>;
+        shopFeaturedBlock?: T | ShopFeaturedBlockSelect<T>;
       };
   sidebarLayout?:
     | T
     | {
         teamStandingsBlock?: T | TeamStandingsBlockSelect<T>;
         nextMatchBlock?: T | NextMatchBlockSelect<T>;
+        calendarBlock?: T | CalendarBlockSelect<T>;
       };
   meta?:
     | T
@@ -1176,12 +1167,7 @@ export interface MediaBlockSelect<T extends boolean = true> {
  * via the `definition` "ArchiveBlock_select".
  */
 export interface ArchiveBlockSelect<T extends boolean = true> {
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
+  Description?: T;
   id?: T;
   blockName?: T;
 }
@@ -1198,18 +1184,19 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CalendarBlock_select".
+ * via the `definition` "DiviserBlock_select".
  */
-export interface CalendarBlockSelect<T extends boolean = true> {
-  apiUrl?: T;
+export interface DiviserBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DiviserBlock_select".
+ * via the `definition` "ShopFeaturedBlock_select".
  */
-export interface DiviserBlockSelect<T extends boolean = true> {
+export interface ShopFeaturedBlockSelect<T extends boolean = true> {
+  isCompactView?: T;
+  shopApiUrl?: T;
   id?: T;
   blockName?: T;
 }
@@ -1230,6 +1217,15 @@ export interface TeamStandingsBlockSelect<T extends boolean = true> {
 export interface NextMatchBlockSelect<T extends boolean = true> {
   maleApiUrl?: T;
   femaleApiUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalendarBlock_select".
+ */
+export interface CalendarBlockSelect<T extends boolean = true> {
+  apiUrl?: T;
   id?: T;
   blockName?: T;
 }

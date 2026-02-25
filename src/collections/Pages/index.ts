@@ -24,6 +24,7 @@ import { TeamStandingsBlock } from '@/blocks/TeamStanding/config'
 import { CalendarBlock } from '@/blocks/Calendar/config'
 import { NextMatchBlock } from '@/blocks/NextMatchBlock/config'
 import { DiviserBlock } from '@/blocks/Diviser/config'
+import { ShopFeaturedBlock } from '@/blocks/ShopFeaturedBlock/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -93,8 +94,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 MediaBlock,
                 Archive,
                 FormBlock,
-                CalendarBlock,
                 DiviserBlock,
+                ShopFeaturedBlock,
               ],
               required: false,
               admin: {
@@ -105,7 +106,7 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'sidebarLayout',
               label: 'Sidebar Content',
               type: 'blocks',
-              blocks: [TeamStandingsBlock, NextMatchBlock],
+              blocks: [TeamStandingsBlock, NextMatchBlock, CalendarBlock],
               required: false,
               admin: { initCollapsed: true },
             },

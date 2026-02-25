@@ -11,6 +11,7 @@ import { TeamStandingsBlock } from '@/blocks/TeamStanding/Component'
 import { CalendarBlock } from './Calendar/Component'
 import { NextMatchBlock } from './NextMatchBlock/Component'
 import { DiviserBlock } from './Diviser/Component'
+import { ShopFeaturedBlock } from './ShopFeaturedBlock/Component'
 
 const contentBlockComponents = {
   archive: ArchiveBlock,
@@ -18,13 +19,14 @@ const contentBlockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
-  calendarBlock: CalendarBlock,
   diviserBlock: DiviserBlock,
+  shopFeaturedBlock: ShopFeaturedBlock
 }
 
 const sidebarBlockComponents = {
   teamStandingsBlock: TeamStandingsBlock,
-  nextMatchBlock: NextMatchBlock
+  nextMatchBlock: NextMatchBlock,
+  calendarBlock: CalendarBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -43,10 +45,12 @@ export const RenderBlocks: React.FC<{
   return (
     <Fragment>
       <div className="container">
-
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-          {/* Left side: content layout */}
-          <div className="lg:col-span-2">
+        <div
+          className={`grid grid-cols-1 gap-4 ${hasSidebarBlocks ? 'lg:grid-cols-3 lg:gap-8' : ''
+            }`}
+        >
+          {/* Content layout */}
+          <div className={hasSidebarBlocks ? 'lg:col-span-2' : 'lg:col-span-3'}>
             {hasContentBlocks &&
               contentBlocks.map((block, index) => {
                 const { blockType } = block
@@ -57,7 +61,7 @@ export const RenderBlocks: React.FC<{
                   if (Block) {
                     return (
                       <div className="my-16" key={index}>
-                        {/* @ts-expect-error there may be some mismatch between the expected types here */}
+                        {/* @ts-expect-error */}
                         <Block {...block} disableInnerContainer />
                       </div>
                     )
@@ -67,11 +71,13 @@ export const RenderBlocks: React.FC<{
               })}
           </div>
 
-          {/* Right side: sidebar layout */}
-          <div className="lg:col-span-1">
-            {hasSidebarBlocks &&
-              sidebarBlocks.map((block, index) => {
-                const { blockType } = block as { blockType?: keyof typeof sidebarBlockComponents }
+          {/* Sidebar layout */}
+          {hasSidebarBlocks && (
+            <div className="lg:col-span-1">
+              {sidebarBlocks.map((block, index) => {
+                const { blockType } = block as {
+                  blockType?: keyof typeof sidebarBlockComponents
+                }
 
                 if (blockType && blockType in sidebarBlockComponents) {
                   const Block = sidebarBlockComponents[blockType]
@@ -79,7 +85,7 @@ export const RenderBlocks: React.FC<{
                   if (Block) {
                     return (
                       <div className="my-16" key={index}>
-                        {/* @ts-expect-error there may be some mismatch between the expected types here */}
+                        {/* @ts-expect-error */}
                         <Block {...block} disableInnerContainer />
                       </div>
                     )
@@ -87,7 +93,8 @@ export const RenderBlocks: React.FC<{
                 }
                 return null
               })}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </Fragment>

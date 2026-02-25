@@ -73,7 +73,7 @@ export const TeamStandings: React.FC<TeamStandingsProps> = ({ maleData, femaleDa
 
                 {/* Table header */}
                 <div
-                    className="grid grid-cols-12 px-4 py-3 text-xs font-semibold"
+                    className="grid grid-cols-12 px-4 py-3 text-xs font-semibold border-b dark:border-[hsl(var(--primary))]"
                     style={{
                         backgroundColor: 'hsl(var(--secondary))',
                         color: 'hsl(var(--secondary-foreground))',
