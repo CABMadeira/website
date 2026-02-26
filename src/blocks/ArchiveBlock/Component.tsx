@@ -42,7 +42,7 @@ export const ArchiveBlock: React.FC<
           {/* First Post - Full Width */}
           <a
             href={`/posts/${firstPost.slug}`}
-            className="group md:col-span-2 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+            className="group border md:col-span-2 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
             style={{ backgroundColor: 'hsl(var(--secondary))' }}
           >
             {firstPost?.meta?.image && typeof firstPost.meta.image === 'object' && (
@@ -73,7 +73,7 @@ export const ArchiveBlock: React.FC<
             <a
               key={post.id}
               href={`/posts/${post.slug}`}
-              className="group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 "
+              className="group border rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 "
               style={{ backgroundColor: 'hsl(var(--secondary))' }}
 
             >

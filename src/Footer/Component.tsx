@@ -11,13 +11,13 @@ export async function Footer() {
   const navItems = footerData?.navItems || []
 
   return (
-    <footer className="bg-[hsl(var(--primary))] py-10">
+    <footer className="bg-[hsl(var(--primary))] dark:bg-[hsl(var(--secondary))] py-10">
       <div className="text-center">
         {/* Logo + Text Side by Side */}
         <div className="flex items-center justify-center mb-5 space-x-3 max-h-16">
           {/* Base height for mobile (smaller screens), larger on md+ */}
           <Logo className="h-12 md:h-18" />
-          <span className="text-2xl font-semibold text-[hsl(var(--secondary))]">
+          <span className="text-2xl font-semibold text-[hsl(var(--secondary))] dark:text-[hsl(var(--primary))] ">
             CAB MADEIRA
           </span>
         </div>
@@ -34,11 +34,11 @@ export async function Footer() {
         </div> */}
 
         {/* Copyright */}
-        <span className="block text-sm text-[hsl(var(--secondary))]">
+        <span className="block text-sm text-[hsl(var(--secondary))]  dark:text-[hsl(var(--primary))]">
           © {new Date().getFullYear()} CAB MADEIRA™. All Rights Reserved. Built with{' '}
           <a
             href="https://payloadcms.com/"
-            className="text-[hsl(var(--yellow))] hover:underline"
+            className="text-[hsl(var(--yellow))] hover:underline  dark:text-[hsl(var(--primary))]"
           >
             Payload CMS
           </a>
@@ -46,7 +46,7 @@ export async function Footer() {
         </span>
 
         {/* Social Icons */}
-        <ul className="flex justify-center mt-5 space-x-5 text-[hsl(var(--secondary))]">
+        <ul className="flex justify-center mt-5 space-x-5 text-[hsl(var(--secondary))] dark:text-[hsl(var(--primary))]">
           <li>
             <a href="#" className="hover:text-[hsl(var(--yellow))]">
               <svg

@@ -57,7 +57,7 @@ export const ShopFeaturedBlock: React.FC<ShopFeaturedProps> = async ({
     })
 
     const displayProducts = normalizedCompactView
-        ? products.slice(0, 4)
+        ? products.slice(0, 6)
         : products
 
     return (
