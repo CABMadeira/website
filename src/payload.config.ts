@@ -19,6 +19,8 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { githubStorageAdapter } from './utilities/githubStorageAdapater'
+import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -72,16 +74,25 @@ export default buildConfig({
   globals: [Header, Footer, GlobalAPI],
   plugins: [
     ...plugins,
-    vercelBlobStorage({
-      enabled: process.env.BLOB_ENABLE === 'true',
-      // Specify which collections should use Vercel Blob
+    // vercelBlobStorage({
+    //   enabled: process.env.BLOB_ENABLE === 'true',
+    //   // Specify which collections should use Vercel Blob
+    //   collections: {
+    //     media: true,
+    //   },
+    //   // Do uploads directly on the client to bypass limits on Vercel
+    //   clientUploads: true,
+    //   // Token provided by Vercel once Blob storage is added to your Vercel project
+    //   token: process.env.BLOB_READ_WRITE_TOKEN,
+    // }),
+    uploadthingStorage({
       collections: {
         media: true,
       },
-      // Do uploads directly on the client to bypass limits on Vercel
-      clientUploads: true,
-      // Token provided by Vercel once Blob storage is added to your Vercel project
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      options: {
+        token: process.env.UPLOADTHING_TOKEN,
+        acl: 'public-read',
+      },
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,
