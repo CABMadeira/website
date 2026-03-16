@@ -11,6 +11,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { HeroBlock } from '@/blocks/Hero/Component'
+import { SponsorsBlock } from '@/blocks/Sponsors/Component'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -56,7 +57,8 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, contentLayout, sidebarLayout } = page
+  const { hero, contentLayout, sidebarLayout, sponsors } = page
+
 
   return (
     <article className="pb-24">
@@ -70,7 +72,17 @@ export default async function Page({ params: paramsPromise }: Args) {
           <HeroBlock {...heroBlock} />
         </div>
       ))}
-      {contentLayout && <RenderBlocks contentBlocks={contentLayout} sidebarBlocks={sidebarLayout} />}
+      {(contentLayout || sidebarLayout) && (
+        <RenderBlocks
+          contentBlocks={contentLayout}
+          sidebarBlocks={sidebarLayout}
+        />
+      )}
+      {sponsors && sponsors.map((sponsorBlock, index) => (
+        <div key={index}>
+          <SponsorsBlock {...sponsorBlock} />
+        </div>
+      ))}
     </article>
   )
 }

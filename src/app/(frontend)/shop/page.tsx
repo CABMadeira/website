@@ -61,7 +61,6 @@ export default async function Page() {
     })
   })
 
-  const displayProducts = products.slice(0, 6)
 
 
   return (
@@ -73,7 +72,7 @@ export default async function Page() {
       </div>
 
       <div className="container mb-8">
-        <PageClient products={displayProducts} />
+        <PageClient products={products} />
       </div>
 
 

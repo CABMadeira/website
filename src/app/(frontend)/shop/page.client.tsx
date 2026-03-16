@@ -53,7 +53,7 @@ const PageClient: React.FC<Props> = ({ products }) => {
 
   return (
 
-    <div className="w-full max-w-6xl flex flex-col gap-6">
+    <div className="w-full flex flex-col gap-6">
 
       {/* Toolbar */}
       <div className="flex items-center justify-between border rounded-lg p-4 bg-[hsl(var(--primary))]">

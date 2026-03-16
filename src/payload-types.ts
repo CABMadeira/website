@@ -186,6 +186,7 @@ export interface Page {
       )[]
     | null;
   sidebarLayout?: (TeamStandingsBlock | NextMatchBlock | CalendarBlock | FormBlock)[] | null;
+  sponsors?: SponsorsBlock[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -786,6 +787,25 @@ export interface FormBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SponsorsBlock".
+ */
+export interface SponsorsBlock {
+  title?: string | null;
+  sponsors?:
+    | {
+        name: string;
+        logo: number | Media;
+        url?: string | null;
+        openInNewTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sponsorsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "gallery".
  */
 export interface Gallery {
@@ -1116,6 +1136,11 @@ export interface PagesSelect<T extends boolean = true> {
         calendarBlock?: T | CalendarBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
+  sponsors?:
+    | T
+    | {
+        sponsorsBlock?: T | SponsorsBlockSelect<T>;
+      };
   meta?:
     | T
     | {
@@ -1267,6 +1292,24 @@ export interface NextMatchBlockSelect<T extends boolean = true> {
  */
 export interface CalendarBlockSelect<T extends boolean = true> {
   apiUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SponsorsBlock_select".
+ */
+export interface SponsorsBlockSelect<T extends boolean = true> {
+  title?: T;
+  sponsors?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        url?: T;
+        openInNewTab?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

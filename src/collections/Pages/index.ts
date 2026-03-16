@@ -26,6 +26,7 @@ import { NextMatchBlock } from '@/blocks/NextMatchBlock/config'
 import { DiviserBlock } from '@/blocks/Diviser/config'
 import { ShopFeaturedBlock } from '@/blocks/ShopFeaturedBlock/config'
 import { GalleryBlock } from '@/blocks/GalleryBlock/config'
+import { SponsorsBlock } from '@/blocks/Sponsors/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -114,6 +115,20 @@ export const Pages: CollectionConfig<'pages'> = {
             },
           ],
           label: 'Content',
+        },
+        {
+          fields: [
+            {
+              name: 'sponsors',
+              label: 'Sponsors Content',
+              type: 'blocks',
+              minRows: 1,
+              maxRows: 1,
+              blocks: [SponsorsBlock],
+              required: false,
+            },
+          ],
+          label: 'Sponsors',
         },
 
         {
