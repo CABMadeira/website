@@ -19,6 +19,7 @@ const nextConfig = {
         }
       }),
     ],
+    unoptimized: true,
     qualities: [75, 100],
     dangerouslyAllowLocalIP: true,
   },
